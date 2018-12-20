@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
 
 .App-logo {
@@ -16,11 +16,10 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+
 }
 
-.App-link {
-  color: #61dafb;
-}
+
 
 @keyframes App-logo-spin {
   from {
@@ -30,3 +29,60 @@
     transform: rotate(360deg);
   }
 }
+    /*"dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn start\"",*/
+.logo {
+  width: 150px;
+  height: 31px;
+  background: rgba(255,255,255,.2);
+  margin: 16px 28px 16px 0;
+  float: left;
+  background: rgba(155,155,155,.2);
+}
+html body{
+  background: #f0f2f5;
+}
+.App .ant-layout-header{
+  background: #fff;
+}
+.Admin .ant-layout-header, .Admin .ant-menu-dark {
+  background: #ff4f4f
+}
+.App .ant-layout-header, .Admin .ant-layout-header{
+  padding:0 20px;
+}
+.ant-layout-sider-children .ant-menu .ant-menu-item a {
+  color: rgba(0, 0, 0, 0.65);
+}
+ .ant-layout-sider-children .ant-menu-inline-collapsed  a {
+display: none;
+}
+.ant-layout-sider-children .ant-menu .ant-menu-submenu-title a {
+  color: rgba(0, 0, 0, 0.65);
+}
+.App .ant-breadcrumb {
+  min-width: 380px;
+}
+ .ant-layout {
+  min-width: 300px;
+}
+@media (max-width:676px) {
+  .logo {
+    width: 20px;
+    margin-right: 8px;
+  }
+  .ant-menu-vertical.ant-menu-sub {
+      min-width: 100% !important;
+  }
+}
+
+@media (max-width:428px) {
+  .ant-menu-horizontal:last-child > .ant-menu-item{
+    float: none !important;
+  }
+}
+
+hr {
+  border: 1px dashed #eee;
+  margin: 40px 0;
+}
+

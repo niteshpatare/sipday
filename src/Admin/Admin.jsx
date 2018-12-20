@@ -1,24 +1,19 @@
 import React, { Component } from 'react';
-import Home from './Home/Home';
-import Calendar from './Calendar/Calendar';
-import NoMatch from './NoMatch/NoMatch';
-import {withRouter} from 'react-router-dom';
-import logo from './logo.svg';
+import Adminhome from '../Adminhome/Adminhome';
+import { DatePicker } from 'antd';
 import { Layout, Menu, Breadcrumb, Icon, }  from 'antd';
 const { SubMenu } = Menu;
 const {
   Header, Content, Footer, Sider,
 } = Layout;
 
-class App extends Component {
+class Admin extends Component {
   render() {
     return (
       <div className="App">
         <Layout>
           <Header className="header">
-            <div className="logo">
-              <img src={logo} style={{verticalAlign: 'top', height: '32px' }}/>
-            </div>
+            <div className="logo" />
             <Menu
               theme="light"
               mode="horizontal"
@@ -76,12 +71,7 @@ class App extends Component {
                 </Menu>
               </Sider>
               <Content style={{ padding: '0 24px', minHeight: 280 }}>
-                
-                {
-                          console.log(this.props.location.pathname),
-                          this.props.location.pathname === '/Home' ? <Home/>: 
-                              (this.props.location.pathname === '/Calendar' ? <Calendar/> : null)
-                }
+                <Adminhome/>
               </Content>
             </Layout>
           </Content>
@@ -94,4 +84,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+export default Admin;

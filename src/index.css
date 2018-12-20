@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans|Montserrat');
+/**/
+html {
+  font-size: 62.5%;
+}
 body {
   margin: 0;
   padding: 0;
@@ -6,9 +11,46 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+body {
+  font-size: 1.8rem;
+  line-height: 2.6rem;
+  font-family: 'Fira Sans', sans-serif !important;
+  word-break: break-word;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Montserrat', sans-serif !important;
+}
+.h3,
+h3 {
+  font-size: 2.8rem;
+}
+.h4,
+h4 {
+  font-size: 2.0rem;
+  line-height: 2.8rem;
+}
+.h5,
+h5 {
+  font-size: 1.6rem;
+}
+/*
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "client": "nodemon --watch server node -- server/server.js --exec react-scripts start",
+    "dev": "concurrently --kill-others-on-fail \"yarn client\" \"yarn start\"",
+    "heroku-postbuild": "cd public && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+*/
