@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Button, Select, Checkbox, DatePicker, message } from 'antd';
 import moment from 'moment';
+import { connect } from 'react-redux';
+import { fetchAmountlist } from '../Flux/Actions/amountListActions';
 
 const Option = Select.Option;
-const amountData = ['Select Amount','1000', '1500', '2000', '2500','3000','3500','4000','4500','5000']; //Fetch from DB
 const dateFormat = 'MMMM Do YYYY';
 const currDate = new Date();
 class SubmitForm extends Component{
     state = {
-        amountDefault: amountData[0],
+        amountDefault: 'Select Amount',
         checkPaid: false,
     }
     onChangeDate = (date, dateString) => {
@@ -18,13 +19,18 @@ class SubmitForm extends Component{
     onAmountChange = (value) => {
                 console.info(value);
         this.setState({
-            amount: value,
+            amountDefault: value,
         });
     }
-
+    componentDidMount() {
+        console.log("componentDidMount"+this.props);
+        this.props.fetchAmountlist();
+        
+    }
 
     render(){
         let amountDefault = this.state.amountDefault;
+        let amountLists = this.props.AMOUNTLIST;
         return(
             <div>
                     <Select
@@ -33,8 +39,8 @@ class SubmitForm extends Component{
                         onChange={this.onAmountChange}
                         style={{ width: '100%' }}
                     >
-                        {amountData.map(
-                            (amount,i) => i===0 ? <Option key={amount}>{amount} </Option> : <Option key={amount}>&#8377; {amount} /-</Option>
+                        {amountLists.map(
+                            (amount,i) => <Option key={amount}>&#8377; {amount} /-</Option>
                         )}
                     </Select><hr/>
                     <DatePicker format={dateFormat} defaultValue={moment(currDate, dateFormat)} style={{ width: '100%' }} onChange={this.onChangeDate} /> <hr/>
@@ -44,4 +50,11 @@ class SubmitForm extends Component{
         );
     }
 }
-export default SubmitForm;
+// export default SubmitForm;
+//  (amount,i) => i===0 ? <Option key={amount}>{amount} </Option> : <Option key={amount}>&#8377; {amount} /-</Option>
+const mapStateToProps = state =>({
+        AMOUNTLIST: state.AMOUNTLIST.amountitems,
+        AMOUNTDEFAULT: state.AMOUNTLIST.amountdefaultitem
+        
+});
+export default connect(mapStateToProps, { fetchAmountlist })(SubmitForm);

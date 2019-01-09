@@ -25,8 +25,9 @@ app.post('/api/world', (req, res) => {
   );
 });
 
-app.get('/api/userdata',(req, res) =>{
-  res.send({ express: [{
+
+app.get('/api/paylist',(req, res) => {
+    res.send({ json: [{
                         'name': 'Nitesh Patare',
                         'amount': [],
                         'payment': {
@@ -82,6 +83,13 @@ app.get('/api/userdata',(req, res) =>{
                           'date': 'Thu Dec 06 2018 09:38:09 GMT+0530' ,
                         }
                       }]
+          });
+});
+
+app.get('/api/amountlist',(req, res) =>{
+  res.send({ json: [ 
+                    '1000', '1500', '2000', '2500','3000','3500','4000','4500','5000'
+                   ]
           });
 });
 

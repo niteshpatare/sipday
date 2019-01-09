@@ -5,6 +5,9 @@ import NoMatch from './NoMatch/NoMatch';
 import {withRouter} from 'react-router-dom';
 import logo from './logo.svg';
 import { Layout, Menu, Breadcrumb, Icon, }  from 'antd';
+import { Provider } from 'react-redux';
+import store from './store';
+
 const { SubMenu } = Menu;
 const {
   Header, Content, Footer, Sider,
@@ -13,6 +16,7 @@ const {
 class App extends Component {
   render() {
     return (
+      <Provider store={store}>
       <div className="App">
         <Layout>
           <Header className="header">
@@ -90,6 +94,7 @@ class App extends Component {
           </Footer>
         </Layout>
       </div>
+      </Provider>
     );
   }
 }

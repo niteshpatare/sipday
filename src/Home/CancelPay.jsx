@@ -15,9 +15,12 @@ class CancelPay extends Component{
   handleVisibleChange = (visible) => {
     this.setState({ visible });
   }
-
+    onCancelPayForm = () => {
+        console.log('onCancelPayForm');
+        this.hide();
+    }  
     render(){
-        const { onSubmitPayForm } =this.props;
+        const { onCancelPayForm } =this.props;
         return(
             
             <Popover
@@ -25,7 +28,7 @@ class CancelPay extends Component{
                 You want to cancel payment. 
                     <div>
                         <br/>            
-                        <Button type="default" onClick={onSubmitPayForm}>
+                        <Button type="default" onClick={this.onCancelPayForm }>
                             <Icon type="close-circle" theme="twoTone" twoToneColor="#eb2f96" />
                             Yes
                         </Button>&nbsp;&nbsp;

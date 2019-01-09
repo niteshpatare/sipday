@@ -4,60 +4,34 @@ import {
   Skeleton, Switch, Card, Icon, Avatar,
 } from 'antd';
 import PeopleItem from './PeopleItem.jsx';
+import { connect } from 'react-redux';
+import { fetchPaylist } from '../Flux/Actions/payListActions';
+
 const Option = Select.Option;
 const { Meta } = Card;
 
-class PeopleData extends Component{
-    /* select box */
-    state = {
-        loading: true,
-        userData: [],
+class PeopleData extends Component {
+
+    componentDidMount() {
+        message.loading('Loading in progress..', 1)
+        .then( this.props.fetchPaylist() )
+        .then(() => message.success('Loading finished', 2.5))
     }
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     // Typical usage (don't forget to compare props):
-    //     if (this.state.loading !== nextState.loading) {
-    //         this.setState({ loading: nextState.loading })
+    // componentDidUpdate(nextProps) {
+    //     console.log("componentDidUpdate");
+    //     if(this.props.AMOUNTLIST !== nextProps.AMOUNTLIST){
+    //         return true
     //     }
     // }
-  componentDidMount() {
-    let me = this;
-    message.loading('Loading ....', 0.1);
-    this.callFetchApi()
-      .then(
-            res => { me.setState({ userData: res.express })
-            console.log(me.state.userData);
-            me.onLoadData(true)
-            message.success('Loading finished', 2.5);
-            }
-      )
-      .catch(err => console.log(err))
-
-      console.log(this.state.userData);
-  }
-  callFetchApi = async () => {
-    const response = await fetch('/api/userdata')
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    return body;
-  };
-
-    onLoadData = (checked) => {
-        let me = this;
-        me.setState({ loading: !checked });
-    }
-
-
-
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     // Typical usage (don't forget to compare props):
+    //     if (this.state.listLoading !== nextState.listLoading) {
+    //         this.setState({ listLoading: nextState.listLoading })
+    //     }
+    // }
     render(){
         const { filterValue, year, month } = this.props;
-        const { loading, userData } = this.state;
-
-        return(
-            <div className="people-data-wrapper">
-                { /* <Switch checked={!loading} onChange={this.onLoadData} /> */ }
-                    <div className="user-block">
-                    {
-                        userData
+        const payListItems = this.props.PAYLIST
                         .filter(
                             (user) => {
                                 if(filterValue=='all') { return user;  }
@@ -69,12 +43,22 @@ class PeopleData extends Component{
                             }
                         )
                         .map(
-                            (user,i) => <PeopleItem key={i} loading={loading} {...user}/> 
-                        )
+                            (user,i) => <PeopleItem key={i} {...user}/> 
+                        );
+        return(
+            <div className="people-data-wrapper">
+                { /* <Switch checked={!loading} onChange={this.onLoadData} /> */ }
+                    <div className="user-block">
+                    {
+                        payListItems
                     }
                     </div>
             </div>
         );
     }
 }
-export default PeopleData;
+
+const mapStateToProps = state =>({
+    PAYLIST: state.PAYLIST.paylistitems,
+});
+export default connect(mapStateToProps, { fetchPaylist })(PeopleData);

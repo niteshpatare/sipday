@@ -1,66 +1,26 @@
 import React, { Component } from 'react';
 import { Row, Col, Button, Select, Checkbox, DatePicker, message } from 'antd';
 import {
-  Skeleton, Switch, Card, Icon, Avatar,
+  Skeleton, Switch, Card, Icon, Avatar
 } from 'antd';
 import SubmitForm from './SubmitForm';
 import CancelPay from './CancelPay';
 import moment from 'moment';
+import { connect } from 'react-redux';
+
 const dateFormat = 'MMMM Do YYYY';
 
 const Option = Select.Option;
 const { Meta } = Card;
 class PeopleItem extends Component{
-    /* select box */
-    loadPayment = (prop) => { 
-        return (prop.payment.payFlag=='paid'? true 
-        : (prop.payment.payFlag=='unpaid'? false : null)
-        ) 
-    }
+
     state = {
-        loading: this.props.loading,
-        paymentFlag: null,
         checkPaid: false,
     }
-    componentWillMount(){
-        console.log("componentWillMount");
-        this.setState({
-            loading: this.props.loading,
-            paymentFlag: this.loadPayment(this.props),
-        });
+    componentDidMount(){
+        console.log("componentDidMount");
     }
-     componentWillReceiveProps(nextProps, nextState) {
-         console.log("componentWillReceiveProps");
-        // Typical usage (don't forget to compare props):
-        if (this.state.loading !== nextState.loading) {
-            this.setState({ loading: nextState.loading })
-        }
-        if (this.loadPayment(nextProps)) {
-            this.setState({ paymentFlag: this.loadPayment })
-        }
-    }
-    shouldComponentUpdate(nextProps, nextState){
-        console.log("shouldComponentUpdate");
-        // if (this.state.loading != nextState.loading) {
-        //     this.setState({ loading: !this.state.loading })
-        // }
-        // let payFlagTemp = this.loadPayment(nextProps)
-        // if (this.state.paymentFlag != payFlagTemp) {
-        //     this.setState({ paymentFlag: payFlagTemp })
-        // }
-        return true
-    }
-     componentDidUpdate(prevProps) {
-         console.log("componentDidUpdate");
-        // Typical usage (don't forget to compare props):
-        if (this.state.loading != prevProps.loading) {
-            this.setState({ loading: !this.state.loading })
-        }
-        let payFlagTemp = this.loadPayment(prevProps)
-        if (this.state.paymentFlag != payFlagTemp) {
-            this.setState({ paymentFlag: payFlagTemp })
-        }
-    }
+
     onCheckPaid = (e) => {
         console.log(`checked = ${e.target.checked}`);
         this.setState({
@@ -69,37 +29,40 @@ class PeopleItem extends Component{
     } 
     onSubmitPayForm = () => {
         console.log('onSubmitPayForm');
-    }   
+    }  
+
     render(){
         const { name, amount, payment } = this.props;
-        let { loading, paymentFlag } = this.state;
+        let paymentFlag = this.props.payment.payFlag;
+        let listloading = this.props.LISTLOADING;
         return(
             <div className="user-item">
+            
                 <Card
                     style={{ marginTop: 16 }}
-                    loading={loading}
+                    loading={listloading}
                     actions={
-                            (loading)?
+                            (listloading)?
                                 ([<Button disabled type="primary" icon="check" size="large">Submit Payment</Button>])
                             :
                             (
-                                paymentFlag?
-                                ([<CancelPay onSubmitPayForm={this.onSubmitPayForm}/>])
+                                (paymentFlag=='paid')?
+                                ([<CancelPay/>])
                                 :
-                                ([<Button type="primary" icon="check" size="large">Submit Payment</Button>])
+                                ([<Button type="primary" onClick={this.onSubmitPayForm} icon="check" size="large">Submit Payment</Button>])
                             )  
                         }
                         >
-                    <Skeleton loading={loading} avatar active>
+                    <Skeleton loading={listloading} avatar active>
                         <Meta
                         title={name}
                         description={
-                            paymentFlag?                           
+                            (paymentFlag=='paid')?                           
                                 (<div>
-                                    <p>&#8377; {amount} /- Paid on - {moment(payment.date).format(dateFormat)} </p>
+                                    <p>&#8377; {amount} /- Paid on - {moment(payment.date).format(dateFormat)}</p>
                                 </div>)
-                                :
-                                (
+                               :
+                               (
                                     <div>
                                         <SubmitForm {...this.state}/>                               
                                     </div>
@@ -109,8 +72,15 @@ class PeopleItem extends Component{
                         
                     </Skeleton>
                 </Card>
+
             </div>
         );
     }
 }
-export default PeopleItem;
+// export default PeopleItem;
+const mapStateToProps = state =>({
+        LISTLOADING: state.PAYLIST.listloading,
+        // PAYMENTFLAG: state.PAYLIST.paymentflag
+        
+});
+export default connect(mapStateToProps, { })(PeopleItem);
