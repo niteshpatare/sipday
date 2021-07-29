@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Popover, Button, Icon } from 'antd';
-
+import { Popover, Button } from 'antd';
+import Icon from '@ant-design/icons';
 class CancelPay extends Component{
     state = {
     visible: false,

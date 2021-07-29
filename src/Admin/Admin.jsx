@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Adminhome from '../Adminhome/Adminhome';
 import { DatePicker } from 'antd';
-import { Layout, Menu, Breadcrumb, Icon, }  from 'antd';
+import { Layout, Menu, Breadcrumb }  from 'antd';
+import Icon from '@ant-design/icons';
 const { SubMenu } = Menu;
 const {
   Header, Content, Footer, Sider,

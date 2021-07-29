@@ -18,7 +18,7 @@ class PeopleList extends Component{
     shouldComponentUpdate(nextProps, nextState){
         console.log("shouldComponentUpdate");
         let me = this;
-        if (me.state.filterValue != nextState.filterValue) {
+        if (me.state.filterValue !== nextState.filterValue) {
             return true
         }
         return true

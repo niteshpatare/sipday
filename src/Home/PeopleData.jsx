@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Button, Select, Checkbox, DatePicker, message } from 'antd';
-import {
-  Skeleton, Switch, Card, Icon, Avatar,
-} from 'antd';
+import { Skeleton, Switch, Card, Avatar } from 'antd';
+import Icon from '@ant-design/icons';
 import PeopleItem from './PeopleItem.jsx';
 import { connect } from 'react-redux';
 import { fetchPaylist } from '../Flux/Actions/payListActions';

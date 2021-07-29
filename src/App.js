@@ -4,7 +4,8 @@ import Calendar from './Calendar/Calendar';
 import NoMatch from './NoMatch/NoMatch';
 import {withRouter} from 'react-router-dom';
 import logo from './logo.svg';
-import { Layout, Menu, Breadcrumb, Icon, }  from 'antd';
+import { Layout, Menu, Breadcrumb }  from 'antd';
+import Icon from '@ant-design/icons';
 import { Provider } from 'react-redux';
 import store from './store';
 
@@ -21,7 +22,7 @@ class App extends Component {
         <Layout>
           <Header className="header">
             <div className="logo">
-              <img src={logo} style={{verticalAlign: 'top', height: '32px' }}/>
+              <img src={logo} alt="SipDay" style={{verticalAlign: 'top', height: '32px' }}/>
             </div>
             <Menu
               theme="light"

@@ -12,7 +12,7 @@ class Root extends Component {
     return (
       <div className="Root">
         <header className="App-header">
-         <img src={logo} style={{width: '50px'}}/>
+         <img alt="Sip Day" src={logo} style={{width: '50px'}}/>
           <a
             className="App-link"
             href="/Home"
