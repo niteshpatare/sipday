@@ -11,20 +11,34 @@ class Root extends Component {
 
     return (
       <div className="Root">
-        <header className="App-header">
-         <img alt="Sip Day" src={logo} style={{width: '50px'}}/>
-          <a
-            className="App-link"
-            href="/Home"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React->>
-          </a>
+        <section style={{display:'flex', minWidth:'50%'}}>
+          <section className="App-header" style={{minWidth:'50%'}}>
+          <img alt="Sip Day" src={logo} style={{width: '50px'}}/>
+            <a
+              className="App-link"
+              href="/#"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Individual Member (Not Live Yet)
+            </a>
 
-        </header>      
-        <div className="container">
-Root
+          </section>  
+          <section className="App-header" style={{minWidth:'50%'}}>
+          <img alt="Sip Day" src={logo} style={{width: '50px'}}/>
+            <a
+              className="App-link"
+              href="/Home"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Treasurer Member
+            </a>
+
+          </section> 
+        </section>    
+        <div className="container" Footer>
+
         </div>
 
         
