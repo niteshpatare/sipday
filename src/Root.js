@@ -11,7 +11,7 @@ class Root extends Component {
 
     return (
       <div className="Root">
-        <section style={{display:'flex', minWidth:'50%'}}>
+        <section style={{display:'flex', flexWrap: 'wrap', minWidth:'50%'}}>
           <section className="App-header" style={{minWidth:'50%'}}>
           <img alt="Sip Day" src={logo} style={{width: '50px'}}/>
             <a
